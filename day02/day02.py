@@ -8,19 +8,14 @@ Gemma McLean
 # Read Input
 # ------
 
-# Lists for start and end ranges
-starts = []
-ends = []
-# Read in the input file and store in lists
+# List to store ranges
+ranges = []
+# Read in the input file and store in list
 with open('day02/input.txt') as file_object:
     # Get ranges separated by commas
-    ranges = file_object.readline().strip().split(',')
-    for r in ranges:
-        # Get start and end from each item
-        start, end = r.split('-')
-        # Append as integers to respective lists
-        starts.append(int(start))
-        ends.append(int(end))
+    for r in file_object.readline().strip().split(','):
+        # Append each range as a tuple of ints
+        ranges.append(tuple(map(int, r.split('-'))))
 
 # ------
 # Part 1
@@ -30,7 +25,7 @@ with open('day02/input.txt') as file_object:
 invalid_ids = 0
 
 # Process each range
-for start, end in zip(starts, ends):
+for start, end in ranges:
     # Check each number in the range
     for i in range(start, end + 1):
         # Convert number to string for easier digit access
@@ -58,7 +53,7 @@ print(f'Part 1: {invalid_ids}')
 invalid_ids = 0
 
 # Process each range
-for start, end in zip(starts, ends):
+for start, end in ranges:
     # Check each number in the range
     for i in range(start, end + 1):
         # Convert number to string for easier digit access
