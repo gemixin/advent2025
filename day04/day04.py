@@ -5,6 +5,10 @@ Gemma McLean
 """
 from collections import deque
 
+# ------
+# Read Input
+# ------
+
 # List to store grid
 grid = []
 # Read in the input file and store each line
@@ -12,6 +16,10 @@ with open('day04/input.txt') as file_object:
     # Append line as string
     for line in file_object:
         grid.append(line.strip())
+
+# ------
+# Preprocessing
+# ------
 
 # Get the number of rows and columns
 rows = len(grid)
@@ -97,15 +105,16 @@ def get_accessible_rolls(grid, neighbour_counts):
     return queue
 
 
-# ------
-# Part 1
-# ------
-
 # Count the neighbouring rolls for each roll in the grid
 neighbour_counts = get_neighbour_counts(grid)
 # Get the accessible rolls (with fewer than 4 neighbours)
 accessible_rolls = get_accessible_rolls(grid, neighbour_counts)
-# Print the result
+
+# ------
+# Part 1
+# ------
+
+# Print the result, which is simply the length of the accessible rolls queue
 print(f'Part 1: {len(accessible_rolls)}')
 
 # ------
@@ -116,9 +125,6 @@ print(f'Part 1: {len(accessible_rolls)}')
 grid = [list(row) for row in grid]
 # Count of removed rolls
 removed = 0
-
-# We can use the accessible rolls queue and neighbour counts from Part 1
-# This is our initial starting point for part 2
 
 # While the queue is not empty
 while accessible_rolls:

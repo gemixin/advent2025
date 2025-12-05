@@ -4,6 +4,10 @@ https://adventofcode.com/2025/day/3
 Gemma McLean
 """
 
+# ------
+# Read Input
+# ------
+
 # List for numbers (battery banks))
 nums = []
 # Read in the input file and store each number in list
@@ -11,6 +15,10 @@ with open('day03/input.txt') as file_object:
     # Get numbers, one per line as strings
     for line in file_object:
         nums.append(line.strip())
+
+# ------
+# Preprocessing
+# ------
 
 # Get length of each number in digits (they are all equal length)
 num_length = len(nums[0])

@@ -4,6 +4,10 @@ https://adventofcode.com/2025/day/1
 Gemma McLean
 """
 
+# ------
+# Read Input
+# ------
+
 # Lists for directions and values
 dirs = []
 vals = []

@@ -4,6 +4,10 @@ https://adventofcode.com/2025/day/2
 Gemma McLean
 """
 
+# ------
+# Read Input
+# ------
+
 # Lists for start and end ranges
 starts = []
 ends = []
