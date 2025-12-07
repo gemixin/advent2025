@@ -28,15 +28,11 @@ with open('day06/input.txt') as file_object:
             raw.append(line.rstrip('\n'))
 
 # ------
-# Preprocessing
-# ------
-
-# Transpose lists to make columns easier to access
-nums_t = list(zip(*nums))
-
-# ------
 # Part 1
 # ------
+
+# Transpose nums to make columns easier to access
+nums_t = list(zip(*nums))
 
 # Total of sums and products
 total = 0
