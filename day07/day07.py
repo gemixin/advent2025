@@ -58,19 +58,19 @@ while stack:
     # Pop the last position from the stack
     xy = stack.pop()
     # Extract x and y from tuple
-    x = xy[0]
-    y = xy[1]
+    i = xy[0]
+    j = xy[1]
     # Get the next position in the beam's path
-    next = grid[x+1][y]
+    next = grid[i+1][j]
     # Trace downwards until hitting a '^' or going out of bounds
-    while next == '.' and within_bounds(x+2, y):
+    while next == '.' and within_bounds(i+2, j):
         # Get the next position in the beam's path
-        x += 1
-        next = grid[x+1][y]
+        i += 1
+        next = grid[i+1][j]
         # If we hit a '^', stop tracing
         if next == '^':
             # Found a split
-            split_pos = (x+1, y)
+            split_pos = (i+1, j)
             # Only count this split if we haven't visited it before
             if split_pos not in visited:
                 # Increment split count
@@ -78,10 +78,40 @@ while stack:
                 # Mark this position as visited
                 visited.add(split_pos)
                 # Add new beams to stack
-                stack.append((x+1, y-1))
-                stack.append((x+1, y+1))
+                stack.append((i+1, j-1))
+                stack.append((i+1, j+1))
             # Stop tracing this beam
             break
 
 # Print the result
 print(f'Part 1: {splits}')
+
+# ------
+# Part 2
+# ------
+
+# Create a DP grid to store timeline counts, initialised to 0
+dp = [[0 for _ in range(cols)] for _ in range(rows)]
+
+# Process grid from bottom to top, right to left
+for i in range(rows - 1, -1, -1):
+    for j in range(cols - 1, -1, -1):
+        # Check if we're at the bottom row
+        if not within_bounds(i + 1, j):
+            # Reached bottom - this position leads to 1 timeline
+            dp[i][j] = 1
+        else:
+            # Get the next cell in the beam's path (below current)
+            next_cell = grid[i + 1][j]
+            # Determine timeline count based on next cell type
+            if next_cell == '^':
+                # Split - sum counts from left and right paths
+                dp[i][j] = dp[i + 1][j - 1] + dp[i + 1][j + 1]
+            else:
+                # Continue - inherit count from cell below
+                dp[i][j] = dp[i + 1][j]
+
+# The total timelines is the count at the starting position
+result = dp[start[0]][start[1]]
+# Print the result
+print(f'Part 2: {result}')
